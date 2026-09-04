@@ -1,4 +1,11 @@
+"use client";
+
+import { useVisitorCheck } from "@/entities/visitors";
+import { Divider, NavLink, SideLine } from "@/shared/ui";
+
 export function HomePage() {
+	useVisitorCheck();
+
 	return (
 		<main className="relative min-h-dvh overflow-hidden bg-black text-white">
 			{/* Background */}
@@ -46,7 +53,7 @@ export function HomePage() {
 					</header>
 
 					{/* Navigation row */}
-					<div className="flex w-full max-w-6xl items-center gap-5 lg:gap-10">
+					<div className="flex w-full max-w-6xl justify-center items-center gap-5 lg:gap-10">
 						<SideLine />
 
 						<nav
@@ -84,68 +91,5 @@ export function HomePage() {
 				</div>
 			</div>
 		</main>
-	);
-}
-
-function NavLink({
-	href,
-	children,
-	external,
-}: {
-	href: string;
-	children: React.ReactNode;
-	external?: boolean;
-}) {
-	return (
-		<a
-			href={href}
-			target={external ? "_blank" : undefined}
-			rel={external ? "noreferrer" : undefined}
-			className="
-				group relative
-				whitespace-nowrap
-				px-6 py-2
-				text-[11px]
-				font-light
-				uppercase
-				tracking-[0.3em]
-				text-white/70
-				transition-colors duration-300
-				hover:text-white
-			"
-		>
-			{children}
-
-			<span
-				className="
-					absolute bottom-0 left-1/2
-					h-px w-0
-					-translate-x-1/2
-					bg-white/70
-					transition-all duration-300
-					group-hover:w-1/2
-				"
-			/>
-		</a>
-	);
-}
-
-function Divider() {
-	return <span className="hidden h-7 w-px bg-white/20 sm:block" />;
-}
-
-function SideLine({ reverse = false }: { reverse?: boolean }) {
-	return (
-		<div
-			className={`hidden flex-1 items-center xl:flex ${
-				reverse ? "flex-row-reverse" : ""
-			}`}
-		>
-			<div
-				className={`h-px w-full ${reverse ? "bg-linear-to-l" : "bg-linear-to-r"} from-transparent via-white/25 to-white/50`}
-			/>
-
-			<span className="size-1 shrink-0 rounded-full bg-white/90 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-		</div>
 	);
 }
