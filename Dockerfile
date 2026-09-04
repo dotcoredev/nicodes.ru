@@ -25,7 +25,7 @@ RUN pnpm build
 FROM node:24-bookworm-slim AS runner
 ENV NODE_ENV=production
 ENV HOSTNAME="0.0.0.0"
-ENV PORT=3005
+ENV PORT=3006
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 

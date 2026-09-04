@@ -7,12 +7,12 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: resume-production
+  group: nicodes-production
   cancel-in-progress: false
 
 env:
   REGISTRY: ghcr.io
-  RESUME_IMAGE: ghcr.io/dotcoredev/nicodes
+  NICODES_IMAGE: ghcr.io/dotcoredev/nicodes
   NEXT_PUBLIC_API_URL: https://api.nicodes.ru/api
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      resume: ${{ steps.filter.outputs.resume }}
+      nicodes: ${{ steps.filter.outputs.nicodes }}
 
     steps:
       - name: Checkout repository
@@ -35,7 +35,7 @@ jobs:
         id: filter
         with:
           filters: |
-            resume:
+            nicodes:
               - 'app/**'
               - 'pages/**'
               - 'src/**'
@@ -60,7 +60,7 @@ jobs:
 
     if: >
       github.event_name == 'workflow_dispatch' ||
-      needs.changes.outputs.resume == 'true'
+      needs.changes.outputs.nicodes == 'true'
 
     permissions:
       contents: read
@@ -86,10 +86,13 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+
           build-args: |
             NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }}
+
           tags: |
-            ${{ env.RESUME_IMAGE }}:latest
-            ${{ env.RESUME_IMAGE }}:${{ github.sha }}
-          cache-from: type=gha,scope=resume
-          cache-to: type=gha,mode=max,scope=resume
+            ${{ env.NICODES_IMAGE }}:latest
+            ${{ env.NICODES_IMAGE }}:${{ github.sha }}
+
+          cache-from: type=gha,scope=nicodes
+          cache-to: type=gha,mode=max,scope=nicodes
