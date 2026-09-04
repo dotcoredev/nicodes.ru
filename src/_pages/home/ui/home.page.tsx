@@ -81,7 +81,7 @@ export function HomePage() {
 
 							<Divider />
 
-							<NavLink href="mailto:lunan.dev@email.com">
+							<NavLink href="mailto:lunan.dev@gmail.com">
 								Контакты
 							</NavLink>
 						</nav>
