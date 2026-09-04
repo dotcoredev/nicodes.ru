@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 	title: "Zhulepa Nikolay - Fullstack Developer",
 	description:
 		"Fullstack Developer, specializing in React, Next.js, and Node.js. Passionate about building scalable web applications and exploring new technologies.",
+	icons: {
+		icon: "https://files.nicodes.ru/nicodes.ru.png",
+	},
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
